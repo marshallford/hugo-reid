@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+  ],
+  "plugins": [
+    "babel",
+    "promise",
+  ],
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "comma-dangle": ["error", "always-multiline"],
+    "jsx-quotes": ["error", "prefer-single"],
+  }
+}
