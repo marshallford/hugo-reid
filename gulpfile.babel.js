@@ -54,15 +54,12 @@ const webpackBundle = (cb) => {
 
 const buildSite = (cb, options) => {
   const args = options ? defaultArgs.concat(options) : defaultArgs
-  return spawn(hugoBin, args, { stdio: 'inherit' }).on('close', (err) => {
-    if (err) {
-      browserSync.notify('Hugo failed to build')
-      cb()
-    } else {
-      browserSync.reload()
-      cb()
-    }
+  const child = spawn(hugoBin, args, { stdio: 'inherit' })
+  child.on('exit', err => {
+    if (!err) browserSync.reload()
+    cb()
   })
+  return child
 }
 
 const cleanDist = () =>
